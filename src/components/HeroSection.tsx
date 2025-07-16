@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useState } from "react";
 import heroImage from "@/assets/hero-dashboard.jpg";
+import { RotatingUseCases } from "./RotatingUseCases";
 
 export const HeroSection = () => {
   const [email, setEmail] = useState("");
