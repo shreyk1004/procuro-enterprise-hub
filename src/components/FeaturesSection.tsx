@@ -43,14 +43,14 @@ export const FeaturesSection = () => {
             <span className="text-sm font-medium">Four Core Capabilities</span>
           </div>
           
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold font-heading text-foreground mb-6">
             Everything Your Business Needs to 
-            <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="block text-primary">
               Scale Automatically
             </span>
           </h2>
           
-          <p className="text-xl text-muted-foreground leading-relaxed">
+          <p className="text-xl text-muted-foreground leading-relaxed font-body">
             Our AI agents handle the repetitive tasks that consume your team's time, 
             letting you focus on strategy and growth.
           </p>
@@ -72,11 +72,11 @@ export const FeaturesSection = () => {
                 </div>
                 
                 {/* Content */}
-                <h3 className="text-2xl font-bold text-foreground mb-4">
+                <h3 className="text-2xl font-bold font-heading text-foreground mb-4">
                   {feature.title}
                 </h3>
                 
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed font-body">
                   {feature.description}
                 </p>
                 
@@ -96,14 +96,14 @@ export const FeaturesSection = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center bg-gradient-hero rounded-3xl p-12 text-white">
-          <h3 className="text-3xl font-bold mb-4">
+        <div className="text-center bg-gradient-card border border-border rounded-3xl p-12">
+          <h3 className="text-3xl font-bold font-heading mb-4 text-foreground">
             Ready to Transform Your Business?
           </h3>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto font-body">
             Join forward-thinking enterprises already scaling with Procuro's AI agents.
           </p>
-          <Button variant="hero" size="lg" className="bg-white text-foreground hover:bg-white/90">
+          <Button size="lg">
             Start Your Free Trial
             <ArrowRight className="h-5 w-5" />
           </Button>

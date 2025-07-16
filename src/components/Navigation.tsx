@@ -21,7 +21,7 @@ export const Navigation = () => {
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">P</span>
             </div>
-            <span className="text-xl font-bold text-foreground">Procuro</span>
+            <span className="text-xl font-bold font-heading text-foreground">Procuro</span>
           </div>
 
           {/* Desktop Navigation */}

@@ -73,11 +73,11 @@ export const RotatingUseCases = () => {
             {currentUseCase.industry}
           </div>
           
-          <h3 className="text-2xl font-bold text-foreground mb-3">
+          <h3 className="text-2xl font-bold font-heading text-foreground mb-3">
             {currentUseCase.title}
           </h3>
           
-          <p className="text-lg text-muted-foreground italic">
+          <p className="text-lg text-muted-foreground italic font-body">
             "{currentUseCase.description}"
           </p>
         </div>
