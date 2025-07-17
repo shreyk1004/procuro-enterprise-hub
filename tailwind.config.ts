@@ -21,6 +21,7 @@ export default {
 			fontFamily: {
 				'heading': ['Cormorant Garamond', 'serif'],
 				'body': ['Cormorant Garamond', 'serif'],
+				'gilroy': ['Gilroy', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

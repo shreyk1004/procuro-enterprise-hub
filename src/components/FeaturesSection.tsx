@@ -1,6 +1,9 @@
 import { Search, Mail, Phone, ShoppingCart, ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+
+// this is the feature list - TO EDIT
+
 const features = [
   {
     icon: Search,
@@ -38,11 +41,6 @@ export const FeaturesSection = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 text-primary mb-6">
-            <Zap className="h-4 w-4" />
-            <span className="text-sm font-medium">Four Core Capabilities</span>
-          </div>
-          
           <h2 className="text-4xl lg:text-5xl font-bold font-heading text-foreground mb-6">
             Everything Your Business Needs to 
             <span className="block text-primary">
@@ -98,13 +96,10 @@ export const FeaturesSection = () => {
         {/* CTA Section */}
         <div className="text-center bg-gradient-card border border-border rounded-3xl p-12">
           <h3 className="text-3xl font-bold font-heading mb-4 text-foreground">
-            Ready to Transform Your Business?
+            Work like you're a team of 100
           </h3>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto font-body">
-            Join forward-thinking enterprises already scaling with Procuro's AI agents.
-          </p>
-          <Button size="lg">
-            Start Your Free Trial
+          <Button size="lg" onClick={() => window.location.href = 'mailto:kshrey10@wharton.upenn.edu'}>
+            Contact Us
             <ArrowRight className="h-5 w-5" />
           </Button>
         </div>

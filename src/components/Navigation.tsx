@@ -7,8 +7,8 @@ export const Navigation = () => {
 
   const navItems = [
     { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "About", href: "#about" },
+    // { label: "Pricing", href: "#pricing" },
+    // { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -19,7 +19,7 @@ export const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <img src="/procuro_icon_white_bg.png" alt="Procuro Logo" className="h-12" />
-            <span className="text-xl font-bold font-heading text-foreground">Procuro</span>
+            <span className="text-xl font-bold font-gilroy text-foreground">Procuro</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -37,8 +37,7 @@ export const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost">Sign In</Button>
-            <Button variant="enterprise">Get Started</Button>
+            <Button variant="enterprise">Get Early Access</Button>
           </div>
 
           {/* Mobile Menu Button */}

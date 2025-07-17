@@ -33,7 +33,7 @@ export const HeroSection = () => {
               </span>
                at Scale
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed max-w-xl font-body">
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-xl font-[Spectral]">
               Procuro empowers enterprises with AI agents that handle search, email outreach, 
               phone calls, and bulk purchasing automatically. Scale your operations without scaling your team.
             </p>
@@ -42,7 +42,7 @@ export const HeroSection = () => {
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md">
               <Input
                 type="email"
-                placeholder="Enter your work email"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="bg-background/90 border-border text-foreground placeholder:text-muted-foreground focus:border-primary"

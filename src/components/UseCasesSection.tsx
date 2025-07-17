@@ -7,7 +7,7 @@ export const UseCasesSection = () => {
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
             Real Problems.
-            <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mt-5">
               Real Solutions.
             </span>
           </h2>
