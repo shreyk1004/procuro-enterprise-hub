@@ -30,29 +30,29 @@ interface ActiveNode {
 }
 
 const useCaseTexts = [
-  "When can they deliver the equipment by?",
-  "Ask my tenant if they can pay on time",
-  "File warranty claim for damaged product",
-  "Chase missing insurance documents",
-  "Request medical pre-authorization,",
-  "up on construction RFI",
-  "Schedule property maintenance visit",
-  "Resolve invoice dispute with vendor",
-  "Submit customs documentation",
-  "Check equipment availability status"
+  "Chase the quote for valve V-32—need price, lead-time, shipping from the vendors.",
+  "Get the commercial invoice from my supplier for container CNU123456 before demurrage hits.",
+  "Request Opposing Counsel for Slack exports Jan1–Mar31 under subpoena.",
+  "Check missing MRI authorization for patient #9815 from their family doctor.",
+  "Get a plumber for Unit 3B ceiling leak.",
+  "Remind applicants missing official transcripts from their university.",
+  "Follow up on 45-day-late Invoice #11027.",
+  "Clarify splice detail on RFI#22 by noon.",
+  "Collect missing I-9 docs from new hire.", 
+  "Close the $5k gala pledge."
 ];
 
 const responseTexts = [
-  "14 July!",
-  "Yes, confirmed!",
-  "Claim submitted.",
-  "Docs received.",
-  "Approved!",
-  "On it!",
-  "Visit scheduled.",
-  "Dispute resolved.",
-  "Docs submitted.",
-  "Available now!"
+  "Supplier replied: $27.60/unit, 6-week lead, $85 DHL. PDF quote saved in ERP.",
+  "Exporter sent it over: invoice attached, HS code 8413.30. I filed it with the broker.",
+  "Opposing counsel provided a link: 1.2 GB ZIP delivered; stored in evidence folder.",
+  "Payer confirmed: Approved, auth ID 542879. Faxed to radiology; EMR updated.",
+  "Vendor booked: plumber arriving 2PM today. Tenant notified and confirmed access.",
+  "Applicant #247 replied: transcript sent via Parchment; delivery PDF archived.",
+  "ACME’s AP said: check mailed, expected ACH Friday. Status set to 'payment en-route.'",
+  "Architect responded: use 4-bolt splice, sheet S-12 attached. I pushed to field app.",
+  "Candidate uploaded: passport scan; I-9 now complete in HRIS.",
+  "Donor confirmed: charge Visa ••4321 this Thursday. CRM and Stripe updated."
 ];
 
 const colors = [
@@ -228,7 +228,7 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
         const active = activeNodeRef.current;
         const elapsed = now - active.startTime;
         const duration = 4000; // 4s for the entire animation (was 2000)
-        const fadeOutDuration = 1200; // ms for fade out (was 700)
+        const fadeOutDuration = 2500; // ms for fade out (was 1200)
 
         if (!active.fadingOut) {
           // Debug log
