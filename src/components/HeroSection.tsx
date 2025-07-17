@@ -1,10 +1,36 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import heroImage from "@/assets/hero-dashboard.jpg";
 import { RotatingUseCases } from "./RotatingUseCases";
 import { CanvasSphere } from "./CanvasSphere";
+
+const JumpingArrow = () => {
+  const scrollToNextSection = () => {
+    // Scroll to UseCasesSection if present
+    const useCasesSection = document.querySelector('[data-section="use-cases"]');
+    if (useCasesSection) {
+      useCasesSection.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    // Fallback: scroll down by one viewport height
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <div
+      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce"
+      onClick={scrollToNextSection}
+      aria-label="Scroll to next section"
+    >
+      <ChevronDown className="h-10 w-10 text-primary drop-shadow-lg" />
+    </div>
+  );
+};
 
 export const HeroSection = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +43,7 @@ export const HeroSection = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden hero-section">
       {/* Animated Sphere Background */}
       <CanvasSphere radius={180} style={{ left: '40%', width: '900px', height: '900px' }} />
       
@@ -58,6 +84,9 @@ export const HeroSection = () => {
           {/* Right Column removed for better background visibility */}
         </div>
       </div>
+      
+      {/* Jumping Arrow */}
+      <JumpingArrow />
     </div>
   );
 };
