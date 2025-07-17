@@ -1,15 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Features", href: "#features" },
+    { label: "Features"},
     // { label: "Pricing", href: "#pricing" },
     // { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "mailto:kshrey10@wharton.upenn.edu" },
   ];
 
   return (
@@ -17,10 +18,10 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <img src="/procuro_icon_white_bg.png" alt="Procuro Logo" className="h-12" />
             <span className="text-xl font-bold font-gilroy text-foreground">Procuro</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -37,7 +38,9 @@ export const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="enterprise">Get Early Access</Button>
+            <Link to="/early-access">
+              <Button variant="enterprise">Get Early Access</Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -67,7 +70,9 @@ export const Navigation = () => {
               ))}
               <div className="flex flex-col gap-2 pt-4">
                 <Button variant="ghost" className="justify-start">Sign In</Button>
-                <Button variant="enterprise" className="justify-start">Get Started</Button>
+                <Link to="/early-access">
+                  <Button variant="enterprise" className="justify-start w-full">Get Early Access</Button>
+                </Link>
               </div>
             </div>
           </div>

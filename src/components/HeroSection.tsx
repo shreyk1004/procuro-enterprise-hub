@@ -5,6 +5,7 @@ import { useState } from "react";
 import heroImage from "@/assets/hero-dashboard.jpg";
 import { RotatingUseCases } from "./RotatingUseCases";
 import { CanvasSphere } from "./CanvasSphere";
+import { Link } from "react-router-dom";
 
 const JumpingArrow = () => {
   const scrollToNextSection = () => {
@@ -60,25 +61,17 @@ export const HeroSection = () => {
                at Scale
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-xl font-[Spectral]">
-              Procuro empowers enterprises with AI agents that handle search, email outreach, 
+              Procuro empowers you with AI agents that handle search, email outreach, 
               phone calls, and bulk purchasing automatically. Scale your operations without scaling your team.
             </p>
 
             {/* Email Signup Form */}
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-background/90 border-border text-foreground placeholder:text-muted-foreground focus:border-primary"
-                required
-              />
-              <Button type="submit" className="whitespace-nowrap">
-                Get Early Access
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </form>
+              <Link to="/early-access" className="flex items-center gap-2 mt-4">
+                <Button type="button" className="whitespace-nowrap">
+                  Get Early Access
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
 
           </div>
           {/* Right Column removed for better background visibility */}

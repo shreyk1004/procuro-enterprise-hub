@@ -20,6 +20,13 @@ interface ActiveNode {
   startTime: number;
   text: string;
   textOpacity: number;
+  fadingOut?: boolean;
+  fadeStartTime?: number;
+  responseText?: string;
+  responseTextOpacity?: number;
+  responseShown?: boolean;
+  responseFadeStart?: number;
+  targetNodeLit?: boolean;
 }
 
 const useCaseTexts = [
@@ -33,6 +40,19 @@ const useCaseTexts = [
   "Resolve invoice dispute with vendor",
   "Submit customs documentation",
   "Check equipment availability status"
+];
+
+const responseTexts = [
+  "14 July!",
+  "Yes, confirmed!",
+  "Claim submitted.",
+  "Docs received.",
+  "Approved!",
+  "On it!",
+  "Visit scheduled.",
+  "Dispute resolved.",
+  "Docs submitted.",
+  "Available now!"
 ];
 
 const colors = [
@@ -120,6 +140,7 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
         const targetNodeIndex = node.connections[randomConnectionIndex];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         const randomText = useCaseTexts[Math.floor(Math.random() * useCaseTexts.length)];
+        const randomResponse = responseTexts[Math.floor(Math.random() * responseTexts.length)];
         
         activeNodeRef.current = {
           nodeIndex: randomNodeIndex,
@@ -128,7 +149,10 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
           progress: 0,
           startTime: now,
           text: randomText,
-          textOpacity: 0
+          textOpacity: 0,
+          responseText: randomResponse,
+          responseTextOpacity: 0,
+          responseShown: false
         };
         
         lastTriggerTimeRef.current = now;
@@ -203,14 +227,49 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
       if (activeNodeRef.current) {
         const active = activeNodeRef.current;
         const elapsed = now - active.startTime;
-        const duration = 2000; //2nds for the entire animation
-        
-        if (elapsed < duration) {
-          active.progress = elapsed / duration;
-          active.textOpacity = Math.min(1, active.progress * 3); // Text fades in quickly
+        const duration = 4000; // 4s for the entire animation (was 2000)
+        const fadeOutDuration = 1200; // ms for fade out (was 700)
+
+        if (!active.fadingOut) {
+          // Debug log
+          console.log('progress:', active.progress, 'elapsed:', elapsed, 'duration:', duration);
+          if (elapsed < duration) {
+            active.progress = elapsed / duration;
+            active.textOpacity = Math.min(1, active.progress * 3); // Text fades in quickly
+            // Show response when edge reaches target
+            if ((active.progress >= 0.99 || elapsed >= duration) && !active.responseShown) {
+              active.responseShown = true;
+              active.responseTextOpacity = 0;
+              active.responseFadeStart = now;
+              active.targetNodeLit = true;
+            }
+            if (active.responseShown && active.responseTextOpacity !== undefined) {
+              // Fade in response box quickly (200ms)
+              const responseFadeElapsed = now - (active.responseFadeStart || now);
+              active.responseTextOpacity = Math.min(1, responseFadeElapsed / 200);
+            }
+          } else {
+            // Start fade out
+            if (!active.responseShown) {
+              active.responseShown = true;
+              active.responseTextOpacity = 1;
+              active.responseFadeStart = now;
+              active.targetNodeLit = true;
+            }
+            active.fadingOut = true;
+            active.fadeStartTime = now;
+          }
         } else {
-          activeNodeRef.current = null;
-          triggerNewNode();
+          // Fading out
+          const fadeElapsed = now - (active.fadeStartTime || now);
+          active.textOpacity = Math.max(0, 1 - fadeElapsed / fadeOutDuration);
+          if (active.responseTextOpacity !== undefined) {
+            active.responseTextOpacity = Math.max(0, 1 - fadeElapsed / fadeOutDuration);
+          }
+          if (fadeElapsed >= fadeOutDuration) {
+            activeNodeRef.current = null;
+            triggerNewNode();
+          }
         }
       } else {
         triggerNewNode();
@@ -262,8 +321,9 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
           const size = 3 + 2 * scale;
 
           // Check if this node is active
-          const isActive = activeNodeRef.current && 
-            (activeNodeRef.current.nodeIndex === i || activeNodeRef.current.targetNodeIndex === i);
+          const isSourceActive = activeNodeRef.current && activeNodeRef.current.nodeIndex === i;
+          const isTargetActive = activeNodeRef.current && activeNodeRef.current.targetNodeIndex === i && activeNodeRef.current.targetNodeLit;
+          const isActive = isSourceActive || isTargetActive;
           
           let nodeColor = '#000000';
           let glowIntensity = 1;
@@ -279,16 +339,15 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
               pulse = 1 + 0.2 * Math.sin(Math.PI * (elapsed / pulseDuration));
             }
 
-            // Draw text box
+            // Draw text box (request)
             if (activeNodeRef.current.nodeIndex === i) {
               ctx.save();
               ctx.globalAlpha = activeNodeRef.current.textOpacity * fade;
-              
               // Calculate text position (outside the sphere)
               const textX = x + (x - centerX) * 0.3;
               const textY = y + (y - centerY) * 0.3;
               // Draw text background
-              ctx.fillStyle = 'rgba(255, 255, 255, 1)'; // Changed to fully opaque white
+              ctx.fillStyle = 'rgba(255, 255, 255, 1)';
               ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
               ctx.lineWidth = 1;
               const textWidth = ctx.measureText(activeNodeRef.current.text).width;
@@ -299,14 +358,42 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
                            textWidth + padding * 2, textHeight + padding * 2, 6);
               ctx.fill();
               ctx.stroke();
-              
               // Draw text
               ctx.fillStyle = '#000000';
               ctx.font = '10px Arial'; // Keep the smaller font size
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
               ctx.fillText(activeNodeRef.current.text, textX, textY);
-              
+              ctx.restore();
+            }
+            // Draw response text box at target node
+            if (activeNodeRef.current.targetNodeIndex === i && activeNodeRef.current.responseShown) {
+              // Log for debugging
+              console.log('Drawing response box at node', i, 'responseShown:', activeNodeRef.current.responseShown, 'opacity:', activeNodeRef.current.responseTextOpacity);
+              ctx.save();
+              // DEBUG: Force opacity to 1 for testing
+              ctx.globalAlpha = (activeNodeRef.current.responseTextOpacity || 0) * fade;
+              // Calculate text position (outside the sphere)
+              const textX = x + (x - centerX) * 0.3;
+              const textY = y + (y - centerY) * 0.3;
+              // Draw text background
+              ctx.fillStyle = 'rgba(255, 255, 0, 1)'; // Yellow for debug
+              ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+              ctx.lineWidth = 1;
+              const textWidth = ctx.measureText(activeNodeRef.current.responseText || '').width;
+              const textHeight = 20;
+              const padding = 8;
+              ctx.beginPath();
+              ctx.roundRect(textX - textWidth/2 - padding, textY - textHeight/2 - padding, 
+                           textWidth + padding * 2, textHeight + padding * 2, 6);
+              ctx.fill();
+              ctx.stroke();
+              // Draw text
+              ctx.fillStyle = '#000000';
+              ctx.font = '10px Arial';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(activeNodeRef.current.responseText || 'DEBUG', textX, textY);
               ctx.restore();
             }
           }
@@ -332,9 +419,45 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
         }
       });
 
+      // DEBUG: Draw a yellow box at every node
+      // rotatedNodes.forEach((node, i) => {
+      //   const fadeStart = -100;
+      //   const fadeEnd = 100;
+      //   const fade = Math.max(0, Math.min(1, (node.z - fadeStart) / (fadeEnd - fadeStart)));
+      //   if (fade > 0) {
+      //     const scale = 1 + node.z / 200;
+      //     const x = centerX + node.x * scale;
+      //     const y = centerY + node.y * scale;
+      //     // Draw debug box
+      //     ctx.save();
+      //     ctx.globalAlpha = 0.5 * fade;
+      //     ctx.fillStyle = 'rgba(255, 255, 0, 1)';
+      //     ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+      //     ctx.lineWidth = 1;
+      //     const text = `Node ${i}`;
+      //     const textWidth = ctx.measureText(text).width;
+      //     const textHeight = 20;
+      //     const padding = 8;
+      //     ctx.beginPath();
+      //     ctx.roundRect(x - textWidth/2 - padding, y - textHeight/2 - padding, textWidth + padding * 2, textHeight + padding * 2, 6);
+      //     ctx.fill();
+      //     ctx.stroke();
+      //     ctx.fillStyle = '#000000';
+      //     ctx.font = '10px Arial';
+      //     ctx.textAlign = 'center';
+      //     ctx.textBaseline = 'middle';
+      //     ctx.fillText(text, x, y);
+      //     ctx.restore();
+      //   }
+      // });
+      // Log targetNodeIndex and responseShown
+      if (activeNodeRef.current) {
+        console.log('targetNodeIndex:', activeNodeRef.current.targetNodeIndex, 'responseShown:', activeNodeRef.current.responseShown);
+      }
+
       // Update rotation (much slower)
-      rotationX += 0.001;
-      rotationY += 0.002;
+      rotationX += 0.0005; // was 0.001
+      rotationY += 0.001;  // was 0.002
     };
 
     animate();
