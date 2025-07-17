@@ -18,9 +18,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">P</span>
-            </div>
+            <img src="/procuro_icon_white_bg.png" alt="Procuro Logo" className="h-12" />
             <span className="text-xl font-bold font-heading text-foreground">Procuro</span>
           </div>
 

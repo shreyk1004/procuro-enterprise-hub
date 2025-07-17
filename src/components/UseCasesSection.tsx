@@ -22,7 +22,7 @@ export const UseCasesSection = () => {
 
           <div className="mt-12 text-center">
             <p className="text-sm text-muted-foreground">
-              <span className="font-medium text-primary">7 industries.</span> Countless workflows. One platform.
+              <span className="font-medium text-primary"> Human </span> workflows. Automated.
             </p>
           </div>
         </div>

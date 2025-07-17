@@ -60,10 +60,6 @@ export const RotatingUseCases = () => {
   return (
     <div className="bg-gradient-card border border-border rounded-2xl p-8 shadow-card backdrop-blur-sm">
       <div className="text-center space-y-4">
-        <div className="text-sm text-primary font-medium">
-          Use Case {currentIndex + 1} of {useCases.length}
-        </div>
-        
         <div 
           className={`transition-all duration-600 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
