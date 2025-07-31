@@ -54,15 +54,15 @@ export const HeroSection = () => {
           <div className="text-foreground space-y-8 animate-fade-in-up">
             
             <h1 className="text-5xl lg:text-6xl font-heading font-bold leading-[1.3]">
-              Automate Your
+              Focus on the
               <span className="block text-primary">
-                <span className="italic">Human</span> Workflows
+                <span className="italic">Human</span> Part of
               </span>
-               at Scale
+               Communication
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-xl font-[Spectral]">
               Procuro empowers you with AI agents that handle search, email outreach, 
-              phone calls, and bulk purchasing automatically. Scale your operations without scaling your team.
+              and phone calls. We put you in touch - you focus on the human part.
             </p>
 
             {/* Email Signup Form */}
