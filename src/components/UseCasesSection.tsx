@@ -11,12 +11,6 @@ export const UseCasesSection = () => {
             className="text-3xl lg:text-4xl text-foreground mb-6"
             style={{ fontFamily: "Playfair Display, serif", fontWeight: 400 }}
           >
-            <img 
-              src="/text with marker interjection img.png" 
-              alt="I don't need a person for that" 
-              className="max-w-full h-auto mx-auto"
-              style={{ maxHeight: "120px" }}
-            />
           </h2>
           
           <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">

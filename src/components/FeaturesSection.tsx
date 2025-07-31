@@ -28,12 +28,19 @@ export const FeaturesSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold font-heading text-foreground mb-6">
-            <span className="inline-block">Run your</span>{" "}
-            <span className="inline-block mt-2">
-              Procurement
-            </span>
-            <span className="block text-primary italic mt-2">
-              Automatically
+            <span className="inline-block">Automate your </span>{" "}
+            <span
+              className={`inline-block transition-all duration-300 ease-in-out ${
+                fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+              style={{
+                minWidth: "200px", // Reserve space for the longest word
+                textAlign: "left",
+                color: "gray"
+              }}
+              aria-live="polite"
+            >
+              {rotatingWords[currentWordIndex]}
             </span>
           </h2>
         </div>
