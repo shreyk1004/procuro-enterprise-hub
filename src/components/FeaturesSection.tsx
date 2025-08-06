@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export const FeaturesSection = () => {
 
-  const rotatingWords = ["Business", "Life", "Calendar"];
+  const rotatingWords = ["People", "Experts", "Connections"];
 
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [fade, setFade] = useState(true);
@@ -28,7 +28,7 @@ export const FeaturesSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold font-heading text-foreground mb-6">
-            <span className="inline-block">Automate your </span>{" "}
+            <span className="inline-block">Natural-feeling automations to find </span>{" "}
             <span
               className={`inline-block transition-all duration-300 ease-in-out ${
                 fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"

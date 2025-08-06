@@ -2,39 +2,39 @@ import { useEffect, useState } from "react";
 
 const useCases = [
   {
-    title: "Warranty Claims",
-    description: "From complaint to shipping label — fully automated.",
-    industry: "Manufacturing"
+    title: "Find AI Researchers",
+    description: "Instantly discover top AI researchers at Stanford and beyond.",
+    industry: "Academia"
   },
   {
-    title: "Insurance Intake",
-    description: "File claims. Chase docs. Keep callers happy.",
-    industry: "Insurance"
+    title: "Connect with Alumni at Google",
+    description: "See which alumni from your school are working at Google and reach out.",
+    industry: "Networking"
   },
   {
-    title: "Medical Pre-Auths",
-    description: "Kill the fax. Automate approvals and appeals.",
-    industry: "Healthcare"
+    title: "Book a Mentor for Product Management",
+    description: "Get matched with mentors who have PM experience relevant to your background.",
+    industry: "Mentorship"
   },
   {
-    title: "Construction RFIs",
-    description: "Capture field changes. Auto-follow-up. Zero delays.",
-    industry: "Construction"
+    title: "Find Study Groups for Data Structures",
+    description: "Join or create study groups with classmates who share your interests.",
+    industry: "Education"
   },
   {
-    title: "Property Maintenance",
-    description: "Tenants call. Vendors show. You sleep.",
-    industry: "Real Estate"
+    title: "Locate Climate Change Experts",
+    description: "Identify connections who have published on climate change topics.",
+    industry: "Research"
   },
   {
-    title: "Invoice Disputes",
-    description: "Find the issue. Fix it. Close the book.",
-    industry: "Finance"
+    title: "Discover Local Language Tutors",
+    description: "Find Mandarin tutors in your city for personalized learning.",
+    industry: "Learning"
   },
   {
-    title: "Customs Docs",
-    description: "Chase missing forms. File clean. Clear faster.",
-    industry: "Logistics"
+    title: "Connect with Hiking Enthusiasts",
+    description: "Meet classmates and colleagues who love hiking as much as you do.",
+    industry: "Community"
   }
 ];
 

@@ -53,16 +53,16 @@ export const HeroSection = () => {
           {/* Left Column - Content */}
           <div className="text-foreground space-y-8 animate-fade-in-up">
             
-            <h1 className="text-5xl lg:text-6xl font-heading font-bold leading-[1.3]">
-              Focus on the
+            <h1 className="text-4xl lg:text-6xl font-heading font-bold leading-[1.3]">
+            The Most <span className="italic">Natural</span>
+              <span className="mx-2" />
               <span className="block text-primary">
-                <span className="italic">Human</span> Part of
+              Human <span className="text-blue-500">Research</span> & <span className="text-blue-500">Outreach</span>.
               </span>
-               Communication
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-xl font-[Spectral]">
-              Procuro empowers you with AI agents that handle search, email outreach, 
-              and phone calls. We put you in touch - you focus on the human part.
+              Personalized agents that learn from your usage, network, and preferences. They handle search, emails, and phone calls. <br />
+              <span className="font-bold italic text-blue-500">Find your best people.</span>
             </p>
 
             {/* Email Signup Form */}
