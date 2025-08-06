@@ -29,31 +29,21 @@ interface ActiveNode {
   targetNodeLit?: boolean;
 }
 
-const useCaseTexts = [
-  "Chase the quote for valve V-32—need price, lead-time, shipping from the vendors.",
-  "Get the commercial invoice from my supplier for container CNU123456 before demurrage hits.",
-  "Request Opposing Counsel for Slack exports Jan1–Mar31 under subpoena.",
-  "Check missing MRI authorization for patient #9815 from their family doctor.",
-  "Get a plumber for Unit 3B ceiling leak.",
-  "Remind applicants missing official transcripts from their university.",
-  "Follow up on 45-day-late Invoice #11027.",
-  "Clarify splice detail on RFI#22 by noon.",
-  "Collect missing I-9 docs from new hire.", 
-  "Close the $5k gala pledge."
-];
+const messageMapping = {
+  "Find me AI researchers from Stanford.": "Stanford AI researchers matched to your interests.",
+  "Show me alumni from my high school at Google.": "8 Lincoln High alumni at Google found for you. Message them?",
+  "Book me a DJ for my birthday.": "House music DJs nearby - booked one for your taste.",
+  "Send me a list of internships for me": "Robotics internships tailored to your CS profile.",
+  "Connect me with classmates who like hiking.": "4 classmates share your hiking interests.",
+  "Who in my network has published on climate change?": "3 connections with climate change papers found. Mail them?",
+  "Find a Mandarin tutor for me": "Tutors in your city.",
+  "Show professors at my university in quantum computing.": "5 professors in quantum computing at your school.",
+  "Find a study group for Data Structures.": "Study groups that fit your schedule and class.",
+  "Reach out to mentors for product management.": "Sent emails to PMs with experience matched to your background."
+};
 
-const responseTexts = [
-  "Supplier replied: $27.60/unit, 6-week lead, $85 DHL. PDF quote saved in ERP.",
-  "Exporter sent it over: invoice attached, HS code 8413.30. I filed it with the broker.",
-  "Opposing counsel provided a link: 1.2 GB ZIP delivered; stored in evidence folder.",
-  "Payer confirmed: Approved, auth ID 542879. Faxed to radiology; EMR updated.",
-  "Vendor booked: plumber arriving 2PM today. Tenant notified and confirmed access.",
-  "Applicant #247 replied: transcript sent via Parchment; delivery PDF archived.",
-  "ACME’s AP said: check mailed, expected ACH Friday. Status set to 'payment en-route.'",
-  "Architect responded: use 4-bolt splice, sheet S-12 attached. I pushed to field app.",
-  "Candidate uploaded: passport scan; I-9 now complete in HRIS.",
-  "Donor confirmed: charge Visa ••4321 this Thursday. CRM and Stripe updated."
-];
+const useCaseTexts = Object.keys(messageMapping);
+const responseTexts = Object.values(messageMapping);
 
 const colors = [
   '#ff4444', // red
@@ -139,8 +129,11 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
         const randomConnectionIndex = Math.floor(Math.random() * node.connections.length);
         const targetNodeIndex = node.connections[randomConnectionIndex];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        const randomText = useCaseTexts[Math.floor(Math.random() * useCaseTexts.length)];
-        const randomResponse = responseTexts[Math.floor(Math.random() * responseTexts.length)];
+        
+        // Select a random message and get its corresponding response
+        const randomMessageIndex = Math.floor(Math.random() * useCaseTexts.length);
+        const selectedMessage = useCaseTexts[randomMessageIndex];
+        const selectedResponse = messageMapping[selectedMessage];
         
         activeNodeRef.current = {
           nodeIndex: randomNodeIndex,
@@ -148,9 +141,9 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
           color: randomColor,
           progress: 0,
           startTime: now,
-          text: randomText,
+          text: selectedMessage,
           textOpacity: 0,
-          responseText: randomResponse,
+          responseText: selectedResponse,
           responseTextOpacity: 0,
           responseShown: false
         };
@@ -339,63 +332,63 @@ export const CanvasSphere = ({ radius = 100, style }: CanvasSphereProps) => {
               pulse = 1 + 0.2 * Math.sin(Math.PI * (elapsed / pulseDuration));
             }
 
-            // Draw text box (request) - HIDDEN FOR NOW
-            // if (activeNodeRef.current.nodeIndex === i) {
-            //   ctx.save();
-            //   ctx.globalAlpha = activeNodeRef.current.textOpacity * fade;
-            //   // Calculate text position (outside the sphere)
-            //   const textX = x + (x - centerX) * 0.3;
-            //   const textY = y + (y - centerY) * 0.3;
-            //   // Draw text background
-            //   ctx.fillStyle = 'rgba(255, 255, 255, 1)';
-            //   ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
-            //   ctx.lineWidth = 1;
-            //   const textWidth = ctx.measureText(activeNodeRef.current.text).width;
-            //   const textHeight = 20;
-            //   const padding = 8;
-            //   ctx.beginPath();
-            //   ctx.roundRect(textX - textWidth/2 - padding, textY - textHeight/2 - padding, 
-            //                textWidth + padding * 2, textHeight + padding * 2, 6);
-            //   ctx.fill();
-            //   ctx.stroke();
-            //   // Draw text
-            //   ctx.fillStyle = '#000000';
-            //   ctx.font = '10px Arial'; // Keep the smaller font size
-            //   ctx.textAlign = 'center';
-            //   ctx.textBaseline = 'middle';
-            //   ctx.fillText(activeNodeRef.current.text, textX, textY);
-            //   ctx.restore();
-            // }
-            // Draw response text box at target node - HIDDEN FOR NOW
-            // if (activeNodeRef.current.targetNodeIndex === i && activeNodeRef.current.responseShown) {
-            //   // Log for debugging
-            //   console.log('Drawing response box at node', i, 'responseShown:', activeNodeRef.current.responseShown, 'opacity:', activeNodeRef.current.responseTextOpacity);
-            //   ctx.save();
-            //   // DEBUG: Force opacity to 1 for testing
-            //   ctx.globalAlpha = (activeNodeRef.current.responseTextOpacity || 0) * fade;
-            //   // Calculate text position (outside the sphere)
-            //   const textX = x + (x - centerX) * 0.3;
-            //   const textY = y + (y - centerY) * 0.3;
-            //   // Draw text background
-            //   ctx.fillStyle = 'rgba(255, 255, 0, 1)'; // Yellow for debug
-            //   ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-            //   ctx.lineWidth = 1;
-            //   const textWidth = ctx.measureText(activeNodeRef.current.responseText || '').width;
-            //   const textHeight = 20;
-            //   const padding = 8;
-            //   ctx.beginPath();
-            //   ctx.roundRect(textX - textWidth/2 - padding, textY - textHeight/2 - padding, 
-            //                textWidth + padding * 2, textHeight + padding * 2, 6);
-            //   ctx.fill();
-            //   ctx.stroke();
-            //   // Draw text
-            //   ctx.fillStyle = '#000000';
-            //   ctx.font = '10px Arial';
-            //   ctx.textAlign = 'center';
-            //   ctx.textBaseline = 'middle';
-            //   ctx.fillText(activeNodeRef.current.responseText || 'DEBUG', textX, textY);
-            //   ctx.restore();
-            // }
+            // Draw text box (request)
+            if (activeNodeRef.current.nodeIndex === i) {
+              ctx.save();
+              ctx.globalAlpha = activeNodeRef.current.textOpacity * fade;
+              // Calculate text position (outside the sphere)
+              const textX = x + (x - centerX) * 0.3;
+              const textY = y + (y - centerY) * 0.3;
+              // Draw text background
+              ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+              ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+              ctx.lineWidth = 1;
+              const textWidth = ctx.measureText(activeNodeRef.current.text).width;
+              const textHeight = 20;
+              const padding = 8;
+              ctx.beginPath();
+              ctx.roundRect(textX - textWidth/2 - padding, textY - textHeight/2 - padding, 
+                           textWidth + padding * 2, textHeight + padding * 2, 6);
+              ctx.fill();
+              ctx.stroke();
+              // Draw text
+              ctx.fillStyle = '#000000';
+              ctx.font = '10px Arial'; // Keep the smaller font size
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(activeNodeRef.current.text, textX, textY);
+              ctx.restore();
+            }
+            // Draw response text box at target node
+            if (activeNodeRef.current.targetNodeIndex === i && activeNodeRef.current.responseShown) {
+              // Log for debugging
+              console.log('Drawing response box at node', i, 'responseShown:', activeNodeRef.current.responseShown, 'opacity:', activeNodeRef.current.responseTextOpacity);
+              ctx.save();
+              // DEBUG: Force opacity to 1 for testing
+              ctx.globalAlpha = (activeNodeRef.current.responseTextOpacity || 0) * fade;
+              // Calculate text position (outside the sphere)
+              const textX = x + (x - centerX) * 0.3;
+              const textY = y + (y - centerY) * 0.3;
+              // Draw text background
+              ctx.fillStyle = 'rgba(255, 255, 0, 1)'; // Yellow for debug
+              ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+              ctx.lineWidth = 1;
+              const textWidth = ctx.measureText(activeNodeRef.current.responseText || '').width;
+              const textHeight = 20;
+              const padding = 8;
+              ctx.beginPath();
+              ctx.roundRect(textX - textWidth/2 - padding, textY - textHeight/2 - padding, 
+                           textWidth + padding * 2, textHeight + padding * 2, 6);
+              ctx.fill();
+              ctx.stroke();
+              // Draw text
+              ctx.fillStyle = '#000000';
+              ctx.font = '10px Arial';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(activeNodeRef.current.responseText || 'DEBUG', textX, textY);
+              ctx.restore();
+            }
           }
           const finalSize = size * pulse * glowIntensity;
 

@@ -120,14 +120,14 @@ export const EarlyAccessForm = () => {
           {/* Single Column Field */}
           <div className="space-y-2">
             <Label htmlFor="useCase" className="text-sm font-medium text-gray-700">
-              USE CASE
+              Message
             </Label>
             <Textarea
               id="useCase"
               value={formData.useCase}
               onChange={(e) => handleChange("useCase", e.target.value)}
               className="border-0 border-b border-gray-300 rounded-none px-0 py-2 text-gray-600 focus:border-gray-900 focus:ring-0 resize-none"
-              placeholder="Can you help with finding new shrimp customers, and reaching out to them?"
+              placeholder="Any questions, use cases, or thoughts are welcome."
               rows={3}
             />
           </div>
