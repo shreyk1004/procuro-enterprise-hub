@@ -7,7 +7,7 @@ export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Features"},
+    { label: "Features", href: "#product-demo" },
     // { label: "Pricing", href: "#pricing" },
     // { label: "About", href: "#about" },
     { label: "Contact", href: "mailto:kshrey10@wharton.upenn.edu" },
@@ -19,8 +19,11 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img src="/procuro_icon_white_bg.png" alt="Procuro Logo" className="h-12" />
-            <span className="text-xl font-bold font-gilroy text-foreground">Procuro</span>
+            <img src="/procuro_icon_white_bg.png" alt="Procura Logo" className="h-12" />
+            <span className="text-xl font-bold font-gilroy text-foreground flex items-end gap-2">
+              Procura
+              <span className="text-xs font-normal text-muted-foreground mb-0.5">by Procuro Labs</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -30,6 +33,11 @@ export const Navigation = () => {
                 key={item.label}
                 href={item.href}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                onClick={item.label === "Features" ? (e) => {
+                  e.preventDefault();
+                  const section = document.querySelector('[data-section="product-demo"]');
+                  if (section) section.scrollIntoView({ behavior: 'smooth' });
+                } : undefined}
               >
                 {item.label}
               </a>
@@ -63,7 +71,14 @@ export const Navigation = () => {
                   key={item.label}
                   href={item.href}
                   className="text-muted-foreground hover:text-foreground transition-colors duration-200 py-2"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMenuOpen(false);
+                    if (item.label === "Features") {
+                      e.preventDefault();
+                      const section = document.querySelector('[data-section="product-demo"]');
+                      if (section) section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   {item.label}
                 </a>

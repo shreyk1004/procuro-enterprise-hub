@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/HeroSection";
 import { UseCasesSection } from "@/components/UseCasesSection";
+import { ProductDemoSection } from "@/components/ProductDemoSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 
 const Index = () => {
@@ -8,8 +9,9 @@ const Index = () => {
     <div className="min-h-screen">
       <Navigation />
       <HeroSection />
-      <UseCasesSection />
+      <ProductDemoSection />
       <FeaturesSection />
+      <UseCasesSection />
     </div>
   );
 };

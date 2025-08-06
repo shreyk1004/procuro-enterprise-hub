@@ -141,6 +141,9 @@ export const EarlyAccessForm = () => {
             >
               Join Waitlist
             </Button>
+            <p className="text-sm text-gray-500 text-center mt-2">
+              We'll have you trying Procura within 1 hour
+            </p>
           </div>
         </form>
       </div>
