@@ -46,9 +46,9 @@ export const Navigation = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/early-access">
-              <Button variant="enterprise">Get Early Access</Button>
-            </Link>
+            <a href="https://www.theprocura.com" target="_blank" rel="noopener noreferrer">
+              <Button variant="enterprise">Try Now</Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -85,9 +85,9 @@ export const Navigation = () => {
               ))}
               <div className="flex flex-col gap-2 pt-4">
                 <Button variant="ghost" className="justify-start">Sign In</Button>
-                <Link to="/early-access">
-                  <Button variant="enterprise" className="justify-start w-full">Get Early Access</Button>
-                </Link>
+                <a href="https://www.theprocura.com" target="_blank" rel="noopener noreferrer">
+                  <Button variant="enterprise" className="justify-start w-full">Try Now</Button>
+                </a>
               </div>
             </div>
           </div>

@@ -5,7 +5,6 @@ import { useState } from "react";
 import heroImage from "@/assets/hero-dashboard.jpg";
 import { RotatingUseCases } from "./RotatingUseCases";
 import { CanvasSphere } from "./CanvasSphere";
-import { Link } from "react-router-dom";
 
 const JumpingArrow = () => {
   const scrollToNextSection = () => {
@@ -66,12 +65,12 @@ export const HeroSection = () => {
             </p>
 
             {/* Email Signup Form */}
-              <Link to="/early-access" className="flex items-center gap-2 mt-4">
+              <a href="https://www.theprocura.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 mt-4">
                 <Button type="button" className="whitespace-nowrap">
-                  Get Early Access
+                  Try Now
                   <ArrowRight className="h-4 w-4" />
                 </Button>
-              </Link>
+              </a>
 
           </div>
           {/* Right Column removed for better background visibility */}

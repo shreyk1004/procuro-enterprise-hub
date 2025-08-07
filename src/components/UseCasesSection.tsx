@@ -1,6 +1,5 @@
 import { RotatingUseCases } from "@/components/RotatingUseCases";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 export const UseCasesSection = () => {
   return (
@@ -27,11 +26,11 @@ export const UseCasesSection = () => {
               <p className="text-lg text-foreground font-medium">
                 See how Procuro works for you
               </p>
-              <Link to="/early-access">
+              <a href="https://www.theprocura.com" target="_blank" rel="noopener noreferrer">
                 <Button className="bg-primary hover:bg-primary/90 text-primary-foreground mt-4">
-                  Get Early Access
+                  Try Now
                 </Button>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
