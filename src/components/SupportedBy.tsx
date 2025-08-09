@@ -39,6 +39,20 @@ export const SupportedBy = () => {
               </CardContent>
             </Card>
 
+            {/* Bullmont Capital Logo */}
+            <Card className="bg-transparent border-0 shadow-none">
+              <CardContent className="p-4">
+                <div className="flex flex-col items-center">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4E0BAQHgVuimDsSbiw/company-logo_200_200/company-logo_200_200/0/1709843736534/bullmont_capital_logo?e=2147483647&v=beta&t=dLp2djgg9rH9WeQ9bbldW4Bmpl-Mg8qZyGBzz5Btte0"
+                    alt="Bullmont Capital"
+                    className="h-12 md:h-16 object-contain"
+                  />
+                  <span className="mt-2 text-sm text-muted-foreground">Bullmont Capital</span>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Penn Wharton Innovation Fund Logo */}
             <Card className="bg-transparent border-0 shadow-none">
               <CardContent className="p-4">
